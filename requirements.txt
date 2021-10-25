@@ -1,0 +1,3 @@
+littlenv==0.1.7
+pexpect==4.8.0
+ptyprocess==0.7.0

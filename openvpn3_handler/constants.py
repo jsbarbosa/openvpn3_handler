@@ -1,6 +1,6 @@
 import os
 
-
+__version__: str = '0.0.3'
 START_FLAG: str = 'start'
 STOP_FLAG: str = 'stop'
 RESTART_FLAG: str = 'restart'

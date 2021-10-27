@@ -54,7 +54,11 @@ def validate_file_exists(filename: str):
 
 
 def read_config(name: str, read_from: str = constants.PROFILE_FILE) -> dict:
-    validate_file_exists(read_from)
+    try:
+        validate_file_exists(read_from)
+    except FileNotFoundError as e:
+        raise(FileNotFoundError(str(s) + ". Create a configuration file by running 'sudo openvpn3_handler config'"))
+
     littlenv.load(path=read_from[:-4])
 
     config = {
@@ -78,8 +82,8 @@ class Menu:
         self._read_from = args[2] if len(args) > 2 else constants.PROFILE_FILE
 
         if not self.check_sudo():
-            command = f"from openvpn3_daemon.io import Menu{args}".replace("'", '"')
-            raise ValueError(f"Please re run with sudo privileges: 'sudo {sys.executable} -c '{command}'")
+            command = f"sudo openvpn3_handler {args}".replace("'", '"')
+            raise ValueError(f"Please re run with sudo privileges: '{command}'")
 
             sys.exit(1)
 
@@ -120,10 +124,10 @@ class Menu:
 
         username = input(constants.INPUT_PROPERTY.format(property='USERNAME'))
         password = getpass(constants.INPUT_PROPERTY.format(property='PASSWORD'))
-        config_name = input(f'CONFIG_NAME=[{constants.DEFAULT_NAME}]: ')
+        config_name = input(f'CONFIG_NAME [{constants.DEFAULT_NAME}]: ')
         config_name = config_name if config_name else constants.DEFAULT_NAME
 
-        write_to = input(f'WRITE_TO=[{constants.PROFILE_FILE}]: ')
+        write_to = input(f'WRITE_TO [{constants.PROFILE_FILE}]: ')
         write_to = write_to if write_to else constants.PROFILE_FILE
 
         write_config(

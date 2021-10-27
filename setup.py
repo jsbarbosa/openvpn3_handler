@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name="openvpn3_handler",
-    version="0.0.1",
+    version="0.0.3",
     author="Juan Barbosa",
     author_email="js.barbosa10@uniandes.edu.co",
     maintainer="Juan Barbosa",
@@ -22,7 +22,7 @@ setup(
     url="https://github.com/jsbarbosa/openvpn3_handler",
     packages=['openvpn3_handler'],
     install_requires=['littlenv>=0.1.7', 'pexpect>=4.8.0'],
-    long_description="",
+    long_description=read('README.md'),
     entry_points={
         'console_scripts': [
             'openvpn3_handler = openvpn3_handler.main:run',

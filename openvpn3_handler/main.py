@@ -1,5 +1,6 @@
 from . import io
+from sys import argv
 
 
-def run(*args):
-    return io.Menu(*args)
+def run():
+    io.Menu(*argv[1:])
